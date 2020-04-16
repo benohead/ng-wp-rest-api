@@ -9,9 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [12.x]
 
     steps:
     - uses: actions/checkout@v2
@@ -19,7 +16,7 @@ jobs:
     - name: Node $
       uses: actions/setup-node@v1
       with:
-        node-version: $
+        node-version: 12.x
 
     - name: npm install and npm run build
       run: |
