@@ -1,0 +1,168 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "ng-wp-rest-api": {
+      "projectType": "library",
+      "root": "projects/ng-wp-rest-api",
+      "sourceRoot": "projects/ng-wp-rest-api/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ng-wp-rest-api/tsconfig.lib.json",
+            "project": "projects/ng-wp-rest-api/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ng-wp-rest-api/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-wp-rest-api/src/test.ts",
+            "tsConfig": "projects/ng-wp-rest-api/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-wp-rest-api/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ng-wp-rest-api/tsconfig.lib.json",
+              "projects/ng-wp-rest-api/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ng-wp-rest-api-showcase": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/ng-wp-rest-api-showcase",
+      "sourceRoot": "projects/ng-wp-rest-api-showcase/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ng-wp-rest-api-showcase",
+            "index": "projects/ng-wp-rest-api-showcase/src/index.html",
+            "main": "projects/ng-wp-rest-api-showcase/src/main.ts",
+            "polyfills": "projects/ng-wp-rest-api-showcase/src/polyfills.ts",
+            "tsConfig": "projects/ng-wp-rest-api-showcase/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/ng-wp-rest-api-showcase/src/favicon.ico",
+              "projects/ng-wp-rest-api-showcase/src/assets"
+            ],
+            "styles": [
+              "projects/ng-wp-rest-api-showcase/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ng-wp-rest-api-showcase/src/environments/environment.ts",
+                  "with": "projects/ng-wp-rest-api-showcase/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ng-wp-rest-api-showcase:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ng-wp-rest-api-showcase:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ng-wp-rest-api-showcase:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-wp-rest-api-showcase/src/test.ts",
+            "polyfills": "projects/ng-wp-rest-api-showcase/src/polyfills.ts",
+            "tsConfig": "projects/ng-wp-rest-api-showcase/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-wp-rest-api-showcase/karma.conf.js",
+            "assets": [
+              "projects/ng-wp-rest-api-showcase/src/favicon.ico",
+              "projects/ng-wp-rest-api-showcase/src/assets"
+            ],
+            "styles": [
+              "projects/ng-wp-rest-api-showcase/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ng-wp-rest-api-showcase/tsconfig.app.json",
+              "projects/ng-wp-rest-api-showcase/tsconfig.spec.json",
+              "projects/ng-wp-rest-api-showcase/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/ng-wp-rest-api-showcase/e2e/protractor.conf.js",
+            "devServerTarget": "ng-wp-rest-api-showcase:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ng-wp-rest-api-showcase:serve:production"
+            }
+          }
+        }
+      }
+    }},
+  "defaultProject": "ng-wp-rest-api"
+}
