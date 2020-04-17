@@ -2,15 +2,20 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { NgWpRestApiModule, PostsService } from 'ng-wp-rest-api';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    NgWpRestApiModule,
   ],
-  providers: [],
+  providers: [
+    { provide: 'wpApiBaseUrl', useValue: 'https://benohead.com/wp-json' },
+    PostsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
