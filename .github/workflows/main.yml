@@ -32,5 +32,5 @@ jobs:
 
     - name: npm install and npm run build
       run: |
-        npm npm install --no-save
+        npm install --no-save
         npm run build
