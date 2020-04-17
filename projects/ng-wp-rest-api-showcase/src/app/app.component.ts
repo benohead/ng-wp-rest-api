@@ -12,6 +12,9 @@ export class AppComponent {
   posts$: Observable<Post[]>;
 
   constructor(private posts: PostsService) {
-    this.posts$ = this.posts.list();
+    this.posts$ = this.posts.list({
+      params: {
+        per_page: '100'
+      }});
   }
 }

@@ -1,6 +1,6 @@
 <h1>Benohead</h1>
-<div>
-  <div *ngFor="let post of posts$ | async">
+<div class="grid-container posts">
+  <div class="grid-item post" *ngFor="let post of posts$ | async">
     <h2 [innerHTML]='post.title.rendered'></h2>
     <i>{{ post.date_gmt | date }}</i>
     <div [innerHTML]="post.excerpt.rendered"></div>
