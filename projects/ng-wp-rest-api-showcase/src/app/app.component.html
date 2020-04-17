@@ -1,8 +1,22 @@
 <h1>Benohead</h1>
-<div class="grid-container posts">
+<label>Show content<input #showContentCheckbox
+id="showContentCheckbox"
+type="checkbox"
+[checked]="showContent"
+(change)="onShowContentChanged(showContentCheckbox.checked)" /></label>
+
+<div class="grid-container posts" *ngIf="!showContent">
   <div class="grid-item post" *ngFor="let post of posts$ | async">
     <h2 [innerHTML]='post.title.rendered'></h2>
     <i>{{ post.date_gmt | date }}</i>
     <div [innerHTML]="post.excerpt.rendered"></div>
+  </div>
+</div>
+
+<div class="posts" *ngIf="showContent">
+  <div class="post" *ngFor="let post of posts$ | async">
+    <h2 [innerHTML]='post.title.rendered'></h2>
+    <i>{{ post.date_gmt | date }}</i>
+    <div [innerHTML]="post.content.rendered"></div>
   </div>
 </div>

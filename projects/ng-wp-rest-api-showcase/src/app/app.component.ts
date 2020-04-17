@@ -10,11 +10,16 @@ import { Observable } from 'rxjs';
 export class AppComponent {
   title = 'ng-wp-rest-api-showcase';
   posts$: Observable<Post[]>;
+  public showContent: boolean;
 
   constructor(private posts: PostsService) {
     this.posts$ = this.posts.list({
       params: {
-        per_page: '100'
+        per_page: '9'
       }});
   }
+
+  public onShowContentChanged(value: boolean){
+    this.showContent = value;
+}
 }
