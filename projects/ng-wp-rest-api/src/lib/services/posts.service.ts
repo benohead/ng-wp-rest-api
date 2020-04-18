@@ -21,11 +21,11 @@ export class PostsService implements Posts {
   }
 
   create(post: Post, options = {}): Observable<Post> {
-    return this.http.post('posts', post, { withCredentials: true, ...options });
+    return this.http.post<Post>('posts', post, { withCredentials: true, ...options });
   }
 
   update(post: Post, options = {}): Observable<Post> {
-    return this.http.post('posts/' + post.id, post, { withCredentials: true, ...options });
+    return this.http.post<Post>('posts/' + post.id, post, { withCredentials: true, ...options });
   }
 
   delete(id: number, options = {}): Observable<Post> {

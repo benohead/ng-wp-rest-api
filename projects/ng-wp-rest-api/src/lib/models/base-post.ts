@@ -1,4 +1,6 @@
-export interface BasePost {
+import { Base } from './base';
+
+export interface BasePost extends Base {
   author?: number;
   comment_status?: string;
   content?: any;

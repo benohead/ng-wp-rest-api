@@ -1,4 +1,6 @@
-export interface Taxonomy {
+import { Base } from './base';
+
+export interface Taxonomy extends Base {
   capabilities?: any;
   description?: string;
   hierarchical?: boolean;

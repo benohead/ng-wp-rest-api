@@ -1,4 +1,6 @@
-export interface Tag {
+import { Base } from './base';
+
+export interface Tag extends Base {
   id?: number;
   count?: number;
   description?: string;

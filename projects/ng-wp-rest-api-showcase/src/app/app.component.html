@@ -1,22 +1,42 @@
-<h1>Benohead</h1>
-<label>Show content<input #showContentCheckbox
-id="showContentCheckbox"
-type="checkbox"
-[checked]="showContent"
-(change)="onShowContentChanged(showContentCheckbox.checked)" /></label>
-
-<div class="grid-container posts" *ngIf="!showContent">
-  <div class="grid-item post" *ngFor="let post of posts$ | async">
-    <h2 [innerHTML]='post.title.rendered'></h2>
-    <i>{{ post.date_gmt | date }}</i>
-    <div [innerHTML]="post.excerpt.rendered"></div>
-  </div>
-</div>
-
-<div class="posts" *ngIf="showContent">
-  <div class="post" *ngFor="let post of posts$ | async">
-    <h2 [innerHTML]='post.title.rendered'></h2>
-    <i>{{ post.date_gmt | date }}</i>
-    <div [innerHTML]="post.content.rendered"></div>
+<h1>TechCrunch</h1>
+<div class="articles_wrapper">
+  <div class="articles">
+    <article *ngFor="let post of posts$ | async">
+      <header>
+        <h2>
+          <a
+            class="post-block__title__link"
+            [innerHTML]="post.title.rendered"
+          ></a>
+        </h2>
+        <div class="post-block__meta">
+          <div class="river-byline">
+            <span class="river-byline__authors">
+              <span>
+                <a href="{{ post._embedded.author[0].link }}">{{
+                  post._embedded.author[0].name
+                }}</a>
+              </span>
+            </span>
+            <div class="river-byline__full-date-time__wrapper">
+              <time class="river-byline__full-date-time">{{ post.date | date: "medium" }}</time>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div class="post-block__content">
+        <p [innerHTML]="post.excerpt.rendered"></p>
+      </div>
+      <footer class="post-block__footer">
+        <figure class="post-block__media">
+          <picture>
+            <img
+              sizes="(max-width: 430px) 100vw, 430px"
+              src="{{ post._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url }}"
+            />
+          </picture>
+        </figure>
+      </footer>
+    </article>
   </div>
 </div>

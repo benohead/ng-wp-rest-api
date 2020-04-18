@@ -1,4 +1,6 @@
-export interface Comment {
+import { Base } from './base';
+
+export interface Comment extends Base {
   id?: number;
   author?: number;
   author_email?: string;

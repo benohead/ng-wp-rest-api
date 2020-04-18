@@ -1,4 +1,6 @@
-export interface Revision {
+import { Base } from './base';
+
+export interface Revision extends Base {
   date?: string;
   date_gmt?: string;
   guid?: any;
