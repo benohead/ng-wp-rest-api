@@ -4,18 +4,13 @@
     <article *ngFor="let post of posts$ | async">
       <header>
         <h2>
-          <a
-            class="post-block__title__link"
-            [innerHTML]="post.title.rendered"
-          ></a>
+          <a class="post-block__title__link" [innerHTML]="post.title.rendered"></a>
         </h2>
         <div class="post-block__meta">
           <div class="river-byline">
             <span class="river-byline__authors">
               <span>
-                <a href="{{ post._embedded.author[0].link }}">{{
-                  post._embedded.author[0].name
-                }}</a>
+                <a href="{{ post.author_link }}">{{ post.author_name }}</a>
               </span>
             </span>
             <div class="river-byline__full-date-time__wrapper">
@@ -30,10 +25,8 @@
       <footer class="post-block__footer">
         <figure class="post-block__media">
           <picture>
-            <img
-              sizes="(max-width: 430px) 100vw, 430px"
-              src="{{ post._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url }}"
-            />
+            <img alt="" sizes="(max-width: 430px) 100vw, 430px"
+              src="{{ post.featuredmedia_medium_source_url }}" />
           </picture>
         </figure>
       </footer>
