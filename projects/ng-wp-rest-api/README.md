@@ -101,4 +101,4 @@ And display posts in your views e.g.:
 
 ## License
 
-MIT © [<%= props.author.name %>](mailto:<%= props.author.email %>)
+MIT © Henri Benoit(mailto:henri.benoit@gmail.com)
