@@ -1,24 +1,104 @@
-# NgWpRestApi
+# Angular WordPress Rest API
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.1.
+## Installation
 
-## Code scaffolding
+To install this library, run:
 
-Run `ng generate component component-name --project ng-wp-rest-api` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ng-wp-rest-api`.
-> Note: Don't forget to add `--project ng-wp-rest-api` or else it will be added to the default project in your `angular.json` file. 
+```bash
+$ npm install ng-wp-rest-api --save
+```
 
-## Build
+and then from your Angular `AppModule`:
 
-Run `ng build ng-wp-rest-api` to build the project. The build artifacts will be stored in the `dist/` directory.
+```typescript
+...
+// Import the module and the posts service from the library
+import { NgWpRestApiModule, PostsService } from 'ng-wp-rest-api';
+...
 
-## Publishing
+@NgModule({
+...
+  imports: [
+...
+    // Specify the library module as an import
+    NgWpRestApiModule,
+...
+  ],
+  providers: [
+...
+    // Define the base URL of your WordPress REST API
+    { provide: 'wpApiBaseUrl', useValue: 'https://techcrunch.com/wp-json' },
+    // And make the Posts service available to your application
+    PostsService,
+...
+  ],
+...
+})
+export class AppModule { }
+```
 
-After building your library with `ng build ng-wp-rest-api`, go to the dist folder `cd dist/ng-wp-rest-api` and run `npm publish`.
+Once the library is imported, you can use its services in your Angular application e.g.:
 
-## Running unit tests
+```typescript
+...
+import { Post, PostsService } from 'ng-wp-rest-api';
+...
+@Component({
+...
+})
+export class AppComponent {
+...
+  posts$: Observable<Post[]>;
+...
 
-Run `ng test ng-wp-rest-api` to execute the unit tests via [Karma](https://karma-runner.github.io).
+  constructor(private posts: PostsService) {
+...
+    this.posts$ = this.posts.list();
+...
+  }
+}
+```
 
-## Further help
+And display posts in your views e.g.:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```html
+<h1>TechCrunch</h1>
+<div class="articles_wrapper">
+  <div class="articles">
+    <article *ngFor="let post of posts$ | async">
+      <header>
+        <h2>
+          <a class="post-block__title__link" [innerHTML]="post.title.rendered"></a>
+        </h2>
+        <div class="post-block__meta">
+          <div class="river-byline">
+            <span class="river-byline__authors">
+              <span>
+                <a href="{{ post.author_link }}">{{ post.author_name }}</a>
+              </span>
+            </span>
+            <div class="river-byline__full-date-time__wrapper">
+              <time class="river-byline__full-date-time">{{ post.date | date: "medium" }}</time>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div class="post-block__content">
+        <p [innerHTML]="post.excerpt.rendered"></p>
+      </div>
+      <footer class="post-block__footer">
+        <figure class="post-block__media">
+          <picture>
+            <img alt="" sizes="(max-width: 430px) 100vw, 430px"
+              src="{{ post.featuredmedia_medium_source_url }}" />
+          </picture>
+        </figure>
+      </footer>
+    </article>
+  </div>
+</div>
+```
+
+## License
+
+MIT © [<%= props.author.name %>](mailto:<%= props.author.email %>)

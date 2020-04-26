@@ -1,6 +1,14 @@
 {
   "name": "ng-wp-rest-api",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "license": "MIT",
+  "repository": "benohead/ng-wp-rest-api",
+  "keywords": [
+    "angular",
+    "ng",
+    "wordpress",
+    "api"
+  ],
   "peerDependencies": {
     "@angular/common": "^9.1.1",
     "@angular/core": "^9.1.1",
